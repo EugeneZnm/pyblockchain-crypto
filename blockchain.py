@@ -49,6 +49,8 @@ def print_blockchain_elements():
     for block in blockchain:
         print('Outputting Block')
         print(block)
+    else:
+        print('-' * 20)
 
 
 def verify_chain():
@@ -56,30 +58,30 @@ def verify_chain():
     chain verification
     :return:
     """
-    block_index = 0
+    # block_index = 0
     is_valid = True
-    for block in blockchain:
-
+    for block_index in range(len(blockchain)):
+        """
+        looping through list allows automatic increament of blocks
+        """
         if block_index == 0:
-            """
-            increament blockchain by 1 if empty
-            
-            """
-            block_index += 1
             continue
-        if block[0] == blockchain[block_index - 1]:
+        elif blockchain[block_index][0] == blockchain[block_index - 1]:
             """
-            checking validity of blocks by comparing it to previous block
+            checking for index in block list inside blockchain list
+            validity of blocks by comparing it to previous block
             """
             is_valid = True
         else:
             is_valid = False
-            break
-        block_index += 1
+    #         break
+    #     block_index += 1
     return is_valid
 
 
-while True:
+waiting_for_input = True
+
+while waiting_for_input:
     print('please choose')
     print('1: Add new transaction value')
     print('2: Output the blockchain blocks')
@@ -103,9 +105,12 @@ while True:
         # accounting from invalid input
         print('input invalid, input value from list')
     if not verify_chain():
+        print_blockchain_elements()
         print('invalid blockchain')
         break
+else:
+    print('user left!')
 
     print('choice registered')
 
-    print('Done!')
+print('Done!')
