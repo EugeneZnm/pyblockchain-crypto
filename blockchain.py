@@ -10,6 +10,11 @@ genesis_block = {'previous_hash': '',
 blockchain = [genesis_block]
 
 
+def hash_block(block):
+
+    return '-'.join([str(block[key] for key in block)])
+
+
 def get_last_blockchain_value():
     """ Returning latest value of current blockchain """
     # checking length of blockchain
@@ -30,11 +35,14 @@ def add_transaction(recipient, sender=owner,  amount=1.0):
 
 def mine_block():
     last_block = blockchain[-1]
-    hashed_block = ''
-    for key in last_block:
-        value = last_block[key]
-        hashed_block = hashed_block + str(value)
 
+    # implementing list comprehension to get key in each dictionary in the block
+    hashed_block = hash_block(last_block)
+    """
+    joining hashed list of dictionaries
+    
+    """
+    print(hashed_block)
     block = {'previous_hash': 'xyz', 'index':len(blockchain), 'transactions': open_transactions}
     blockchain.append(block)
 
@@ -75,25 +83,14 @@ def verify_chain():
     chain verification
     :return:
     """
-    # block_index = 0
-    is_valid = True
-    for block_index in range(len(blockchain)):
-        """
-        looping through list allows automatic increament of blocks
-        """
-        if block_index == 0:
+    # comparing stored hash in a block with recalculated hash of previous block
+    for (index,block) in enumerate(blockchain):
+        """ loop through blocks in blockchain """
+        if index == 0:
             continue
-        elif blockchain[block_index][0] == blockchain[block_index - 1]:
-            """
-            checking for index in block list inside blockchain list
-            validity of blocks by comparing it to previous block
-            """
-            is_valid = True
-        else:
-            is_valid = False
-    #         break
-    #     block_index += 1
-    return is_valid
+
+        # comparing value stored in last key with previous block
+        if block['previous_hash'] ==  hash_block(blockchain[index -1])
 
 
 waiting_for_input = True
