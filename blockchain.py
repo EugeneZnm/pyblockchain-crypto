@@ -1,6 +1,12 @@
 # declaring blockchain variable
 
 blockchain = []
+open_transactions = []
+owner = 'Nick'
+genesis_block = {'previous_hash': '',
+                 'index': 0,
+                 'transactions': []
+                 }
 
 
 def get_last_blockchain_value():
@@ -12,25 +18,29 @@ def get_last_blockchain_value():
     return blockchain[-1]
 
 
-def add_transaction(coins, last_transaction=[1]):
-    """ Appending new value of blockchain as well as last value of blockchain to blockchain
-
-    coins =  amount added into blockchain after every transacion
-    last-transaction = added to blockchain after
+def add_transaction(recipient, sender=owner,  amount=1.0):
     """
+    Appending new value of blockchain as well as last value of blockchain to blockchain
 
-    if last_transaction == None:
-        last_transaction = [1]
-    blockchain.append([last_transaction, coins])
+    """
+    transaction = {'sender': sender, 'recipient': recipient, 'amount': amount}
+    open_transactions.append(transaction)
 
+
+def mine_block():
+    last_block = blockchain[-1]
+    block = {'previous_hash': 'xyz', 'index':len(blockchain), 'transactions': open_transactions}
+    blockchain.append(block)
 
 def get_transaction_value():
     """
     function to get transaction value
     :return:
     """
-    user_input = float(input('Input amount: '))
-    return user_input
+    tx_recipient = input('Enter recipient: ')
+    tx_amount = float(input('Input amount: '))
+    return tx_recipient, tx_amount
+
 
 def get_user_choice():
     """
@@ -91,8 +101,10 @@ while waiting_for_input:
     # getting choice form user
     user_choice = get_user_choice()
     if user_choice == '1':
-        tx_amount = get_transaction_value()
-        add_transaction(tx_amount, get_last_blockchain_value())
+        tx_data = get_transaction_value()
+        recipient, amount = tx_data
+        add_transaction(recipient, amount=amount)
+        print(open_transactions)
     elif user_choice =='2':
         # ending the transaction
         print_blockchain_elements()
