@@ -88,6 +88,7 @@ def mine_block():
         'amount': MINING_REWARD,
     }
     # appending reward of mining transaction to transaction details
+    copied_transactions =   open_transactions[:]
     open_transactions.append(reward_transaction)
     """
     joining hashed list of dictionaries
@@ -96,7 +97,7 @@ def mine_block():
     # print(hashed_block)
     block = {'previous_hash': hashed_block,
              'index':len(blockchain),
-             'transactions': open_transactions
+             'transactions': copied_transactions
              }
     blockchain.append(block)
 
