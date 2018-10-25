@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f393adf1-570f-40ea-9bda-263ddbfa57bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/blockchain.py" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain.py" afterDir="false" />
-    </list>
+    <list default="true" id="f393adf1-570f-40ea-9bda-263ddbfa57bd" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +31,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5439" />
+          <entry key="py" value="5489" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="5439" />
+          <entry key="Python" value="5489" />
         </counts>
       </usages-collector>
     </session>
@@ -48,16 +46,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blockchain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1950">
-              <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+            <state relative-caret-position="-45">
+              <caret line="171" column="32" lean-forward="true" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
               <folding>
-                <marker date="1540459694480" expanded="true" signature="614:1399" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="1431:1436" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="2172:2282" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="2815:3062" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="3250:3650" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="3471:3650" ph="..." />
-                <marker date="1540459694480" expanded="true" signature="3671:4152" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="614:1399" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="1431:1436" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="2172:2282" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="2815:3062" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="3250:3650" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="3471:3650" ph="..." />
+                <marker date="1540459775741" expanded="true" signature="3671:4152" ph="..." />
               </folding>
             </state>
           </provider>
@@ -83,9 +81,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="650" />
+    <option name="x" value="705" />
     <option name="y" value="24" />
-    <option name="width" value="716" />
+    <option name="width" value="661" />
     <option name="height" value="736" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -134,7 +132,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="650" y="24" width="716" height="736" extended-state="0" />
+    <frame x="705" y="24" width="661" height="736" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.1718919" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -148,7 +146,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" weight="0.3275862" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49772727" visible="true" weight="0.05756579" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49772727" visible="true" weight="0.46875" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5022727" side_tool="true" weight="0.33695653" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Thumbnails" order="12" weight="0.32919255" />
@@ -165,16 +163,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/blockchain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1950">
-          <caret line="29" column="50" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+        <state relative-caret-position="-45">
+          <caret line="171" column="32" lean-forward="true" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
           <folding>
-            <marker date="1540459694480" expanded="true" signature="614:1399" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="1431:1436" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="2172:2282" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="2815:3062" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="3250:3650" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="3471:3650" ph="..." />
-            <marker date="1540459694480" expanded="true" signature="3671:4152" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="614:1399" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="1431:1436" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="2172:2282" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="2815:3062" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="3250:3650" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="3471:3650" ph="..." />
+            <marker date="1540459775741" expanded="true" signature="3671:4152" ph="..." />
           </folding>
         </state>
       </provider>
