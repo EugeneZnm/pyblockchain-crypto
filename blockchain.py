@@ -14,7 +14,8 @@ MINING_REWARD = 10
 
 genesis_block = {'previous_hash': '',
                  'index': 0,
-                 'transactions': []
+                 'transactions': [],
+                 'proof': 100
                  }
 blockchain = [genesis_block]
 open_transactions = []
@@ -22,7 +23,25 @@ owner = 'Nick'
 participants ={'Nick'}
 
 
+def valid_proof(transactions, last_hash, proof):
+    """ function for validating new hash"""
+    guess = (str(transactions) + str(last_hash) + str(proof)).encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+    print(guess_hash)
+    return guess_hash[0:2] == '00'
+
+
+def proof_of_work():
+    last_block = blockchain[-1]
+    last_hash = hash_block(last_block)
+    proof = 0
+    while not valid_proof(open_transactions, last_hash, proof):
+        proof +=1
+    return proof
+
+
 def hash_block(block):
+    """ hashes a block and returns representation of block """
 
     # hashing blocks, conversion to formated string, encoding
     # hexdigest method returns hash with normal characters
@@ -88,7 +107,7 @@ def mine_block():
 
     # implementing list comprehension to get key in each dictionary in the block
     hashed_block = hash_block(last_block)
-    print(hashed_block)
+    proof = proof_of_work()
 
     # determine reward for miners
     reward_transaction ={
@@ -106,7 +125,8 @@ def mine_block():
     # print(hashed_block)
     block = {'previous_hash': hashed_block,
              'index':len(blockchain),
-             'transactions': copied_transactions
+             'transactions': copied_transactions,
+             'proof': proof,
              }
     blockchain.append(block)
 
@@ -159,6 +179,11 @@ def verify_chain():
         # comparing value stored in last key with previous block
         if block['previous_hash'] != hash_block(blockchain[index -1]):
             return False
+
+        if not valid_proof(block['transactions'][:-1], block['previous_hash'], block['proof']):
+            print('proof of work is invalid')
+            return False
+
     return True
 
 
