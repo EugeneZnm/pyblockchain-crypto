@@ -43,7 +43,7 @@ def mine_block():
     
     """
     print(hashed_block)
-    block = {'previous_hash': 'xyz', 'index':len(blockchain), 'transactions': open_transactions}
+    block = {'previous_hash': hashed_block, 'index':len(blockchain), 'transactions': open_transactions}
     blockchain.append(block)
 
 
@@ -90,8 +90,9 @@ def verify_chain():
             continue
 
         # comparing value stored in last key with previous block
-        if block['previous_hash'] ==  hash_block(blockchain[index -1])
-
+        if block['previous_hash'] ==  hash_block(blockchain[index -1]):
+            return False
+    return True
 
 waiting_for_input = True
 
@@ -108,27 +109,32 @@ while waiting_for_input:
     if user_choice == '1':
         tx_data = get_transaction_value()
         recipient, amount = tx_data
+
+        # adding transaction amount to the blockchain
         add_transaction(recipient, amount=amount)
         print(open_transactions)
     elif user_choice =='2':
         mine_block()
-        # ending the transaction
+    elif user_choice == '3':
         print_blockchain_elements()
     elif user_choice == 'h':
         if len(blockchain) >= 1:
-            blockchain[0] = [2]
+            blockchain[0] = {
+                 'previous_hash': '',
+                 'index': 0,
+                 'transactions': [{'sender': 'chris', 'recipient':'Max', 'amount':100.0}]
+                             }
     elif user_choice == 'q':
-        break
+        waiting_for_input = False
     else:
         # accounting for invalid input
         print('input invalid, input value from list')
-    # if not verify_chain():
-    #     print_blockchain_elements()
-    #     print('invalid blockchain')
-    #     break
+    if not verify_chain():
+        print_blockchain_elements()
+        print('invalid blockchain')
+        break
 else:
     print('user left!')
 
-    print('choice registered')
 
 print('Done!')
