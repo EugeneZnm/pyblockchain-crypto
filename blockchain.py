@@ -1,3 +1,5 @@
+import functools
+
 # declaring blockchain variable
 
 # reward for blockchain miner
@@ -29,16 +31,13 @@ def get_balance(participant):
 
     # list with all transaction amounts for sender
     tx_sender.append(open_tx_sender)
-    amount_sent = 0
-    for tx in tx_sender:
-        if len(tx) > 0:
-            amount_sent += tx[0]
+
+    amount_sent = functools.reduce(lambda tx_sum, tx_amt: tx_sum + tx_amt[0] if len(tx_amt) > 0 else 0, tx_sender, 0)
     tx_recipient = [[tx['amount'] for tx in block['transactions'] if tx['recipient'] == participant] for block in blockchain]
-    amount_received = 0
-    for tx in tx_recipient:
-        if len(tx) > 0:
-            amount_received += tx[0]
-    return amount_received -amount_sent
+
+    amount_received = functools.reduce(lambda tx_sum, tx_amt: tx_sum + tx_amt[0] if len(tx_amt) > 0 else 0, tx_recipient, 0)
+
+    return amount_received - amount_sent
 
 
 def get_last_blockchain_value():
@@ -88,8 +87,8 @@ def mine_block():
         'amount': MINING_REWARD,
     }
     # appending reward of mining transaction to transaction details
-    copied_transactions =   open_transactions[:]
-    open_transactions.append(reward_transaction)
+    copied_transactions = open_transactions[:]
+    copied_transactions.append(reward_transaction)
     """
     joining hashed list of dictionaries
     
@@ -142,7 +141,7 @@ def verify_chain():
     :return:
     """
     # comparing stored hash in a block with recalculated hash of previous block
-    for (index,block) in enumerate(blockchain):
+    for (index, block) in enumerate(blockchain):
         """ loop through blocks in blockchain """
         if index == 0:
             continue
@@ -162,6 +161,7 @@ def verify_transactions():
     #         is_valid = False
     # return is_valid
     return all([verify_transaction(tx) for tx in open_transactions])
+
 
 waiting_for_input = True
 
@@ -217,7 +217,7 @@ while waiting_for_input:
         print_blockchain_elements()
         print('invalid blockchain')
         break
-    print(get_balance('Nick'))
+    print('Balance of {}: {:6.2f}'.format('Nick', get_balance('Nick')))
 else:
     print('user left!')
 
