@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f393adf1-570f-40ea-9bda-263ddbfa57bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blockchain.py" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,15 +50,15 @@
         <entry file="file://$PROJECT_DIR$/blockchain.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="97">
-              <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+              <caret line="95" column="7" selection-start-line="95" selection-start-column="7" selection-end-line="95" selection-end-column="7" />
               <folding>
-                <marker date="1540466451346" expanded="true" signature="614:1399" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="1431:1436" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="2172:2282" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="2865:3114" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="3302:3702" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="3523:3702" ph="..." />
-                <marker date="1540466451346" expanded="true" signature="3723:4204" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="614:1399" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="1431:1436" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="2172:2282" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="2864:3113" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="3301:3701" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="3522:3701" ph="..." />
+                <marker date="1540466856879" expanded="true" signature="3722:4203" ph="..." />
               </folding>
             </state>
           </provider>
@@ -135,7 +136,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="644" y="24" width="722" height="736" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.1718919" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -167,15 +167,15 @@
     <entry file="file://$PROJECT_DIR$/blockchain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
-          <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+          <caret line="95" column="7" selection-start-line="95" selection-start-column="7" selection-end-line="95" selection-end-column="7" />
           <folding>
-            <marker date="1540466451346" expanded="true" signature="614:1399" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="1431:1436" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="2172:2282" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="2865:3114" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="3302:3702" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="3523:3702" ph="..." />
-            <marker date="1540466451346" expanded="true" signature="3723:4204" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="614:1399" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="1431:1436" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="2172:2282" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="2864:3113" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="3301:3701" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="3522:3701" ph="..." />
+            <marker date="1540466856879" expanded="true" signature="3722:4203" ph="..." />
           </folding>
         </state>
       </provider>
