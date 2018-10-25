@@ -1,19 +1,38 @@
 # declaring blockchain variable
 
+# reward for blockchain miner
+MINING_REWARD = 10
 
-open_transactions = []
-owner = 'Nick'
 genesis_block = {'previous_hash': '',
                  'index': 0,
                  'transactions': []
                  }
 blockchain = [genesis_block]
+open_transactions = []
+owner = 'Nick'
 participants ={'Nick'}
 
 
 def hash_block(block):
 
     return '-'.join([str(block[key] for key in block)])
+
+
+def get_balance(participant):
+    """ getting transaction amount for specific sender/participant """
+
+    # getting  amount for specific transaction in transactions in a block in the blockchain if sender of transaction is a participant
+    tx_sender = [[tx['amount'] for tx in block['transactions'] if tx['sender'] == participant] for block in blockchain]
+    amount_sent = 0
+    for tx in tx_sender:
+        if len(tx) > 0:
+            amount_sent += tx[0]
+    tx_recipient = [[tx['amount'] for tx in block['transactions'] if tx['recipient'] == participant] for block in blockchain]
+    amount_received = 0
+    for tx in tx_recipient:
+        if len(tx) > 0:
+            amount_received += tx[0]
+    return amount_received -amount_sent
 
 
 def get_last_blockchain_value():
@@ -30,25 +49,44 @@ def add_transaction(recipient, sender=owner,  amount=1.0):
     Appending new value of blockchain as well as last value of blockchain to blockchain
 
     """
-    transaction = {'sender': sender, 'recipient': recipient, 'amount': amount}
+    transaction = {'sender': sender,
+                   'recipient': recipient,
+                   'amount': amount
+                   }
     open_transactions.append(transaction)
 
     # management of participants
     participants.add(sender)
     participants.add(recipient)
 
+
 def mine_block():
     last_block = blockchain[-1]
 
     # implementing list comprehension to get key in each dictionary in the block
     hashed_block = hash_block(last_block)
+
+    # determine reward for miners
+    reward_transaction ={
+        'sender': 'MINING',
+        'recipient'owner,
+        'amount': MINING_REWARD,
+    }
+    # appending reward of mining transaction to transaction details
+    open_transactions.append(reward_transaction)
     """
     joining hashed list of dictionaries
     
     """
     print(hashed_block)
-    block = {'previous_hash': hashed_block, 'index':len(blockchain), 'transactions': open_transactions}
+    block = {'previous_hash': hashed_block,
+             'index':len(blockchain),
+             'transactions': open_transactions
+             }
     blockchain.append(block)
+
+    # resetting open transactions back to empty array
+    return True
 
 
 def get_transaction_value():
@@ -94,9 +132,10 @@ def verify_chain():
             continue
 
         # comparing value stored in last key with previous block
-        if block['previous_hash'] ==  hash_block(blockchain[index -1]):
+        if block['previous_hash'] != hash_block(blockchain[index -1]):
             return False
     return True
+
 
 waiting_for_input = True
 
@@ -119,7 +158,10 @@ while waiting_for_input:
         add_transaction(recipient, amount=amount)
         print(open_transactions)
     elif user_choice =='2':
-        mine_block()
+
+        # resetting transactions to an empty array when mining occurs
+        if mine_block():
+            open_transactions = []
     elif user_choice == '3':
         print_blockchain_elements()
     elif user_choice == '4':
@@ -140,6 +182,7 @@ while waiting_for_input:
         print_blockchain_elements()
         print('invalid blockchain')
         break
+    print(get_balance('Nick'))
 else:
     print('user left!')
 
