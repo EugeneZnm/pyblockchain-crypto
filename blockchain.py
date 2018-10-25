@@ -7,6 +7,10 @@ import hashlib
 # for conversion of block to string
 import json
 
+from collections import OrderedDict
+
+from hash_util import hash_block, hash_string
+
 # declaring blockchain variable
 
 # reward for blockchain miner
@@ -26,7 +30,7 @@ participants ={'Nick'}
 def valid_proof(transactions, last_hash, proof):
     """ function for validating new hash"""
     guess = (str(transactions) + str(last_hash) + str(proof)).encode()
-    guess_hash = hashlib.sha256(guess).hexdigest()
+    guess_hash = hash_string(guess)
     print(guess_hash)
     return guess_hash[0:2] == '00'
 
@@ -38,14 +42,6 @@ def proof_of_work():
     while not valid_proof(open_transactions, last_hash, proof):
         proof +=1
     return proof
-
-
-def hash_block(block):
-    """ hashes a block and returns representation of block """
-
-    # hashing blocks, conversion to formated string, encoding
-    # hexdigest method returns hash with normal characters
-    return hashlib.sha256(json.dumps(block).encode()).hexdigest()
 
 
 def get_balance(participant):
@@ -86,7 +82,7 @@ def add_transaction(recipient, sender=owner,  amount=1.0):
                    'recipient': recipient,
                    'amount': amount
                    }
-
+    transaction = OrderedDict([('sender', sender), ('recipient', recipient), ('amount',amount)])
     if verify_transaction(transaction):
         open_transactions.append(transaction)
 
@@ -110,11 +106,12 @@ def mine_block():
     proof = proof_of_work()
 
     # determine reward for miners
-    reward_transaction ={
-        'sender': 'MINING',
-        'recipient': owner,
-        'amount': MINING_REWARD,
-    }
+    # reward_transaction ={
+    #     'sender': 'MINING',
+    #     'recipient': owner,
+    #     'amount': MINING_REWARD,
+    # }
+    reward_transaction = OrderedDict([('sender', 'MINING'), ('recipient', owner), ('amount', MINING_REWARD) ])
     # appending reward of mining transaction to transaction details
     copied_transactions = open_transactions[:]
     copied_transactions.append(reward_transaction)
@@ -188,13 +185,6 @@ def verify_chain():
 
 
 def verify_transactions():
-    # is_valid = True
-    # for tx in open_transactions:
-    #     if verify_transaction(tx):
-    #         is_valid = True
-    #     else:
-    #         is_valid = False
-    # return is_valid
     return all([verify_transaction(tx) for tx in open_transactions])
 
 
