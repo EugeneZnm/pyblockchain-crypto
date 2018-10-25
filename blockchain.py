@@ -1,5 +1,12 @@
 import functools
 
+# hashing tool
+import hashlib
+
+# json(encodes data structures to strings)
+# for conversion of block to string
+import json
+
 # declaring blockchain variable
 
 # reward for blockchain miner
@@ -17,7 +24,9 @@ participants ={'Nick'}
 
 def hash_block(block):
 
-    return '-'.join([str(block[key]) for key in block])
+    # hashing blocks, conversion to formated string, encoding
+    # hexdigest method returns hash with normal characters
+    return hashlib.sha256(json.dumps(block).encode()).hexdigest()
 
 
 def get_balance(participant):
@@ -32,7 +41,7 @@ def get_balance(participant):
     # list with all transaction amounts for sender
     tx_sender.append(open_tx_sender)
 
-    amount_sent = functools.reduce(lambda tx_sum, tx_amt: tx_sum + tx_amt[0] if len(tx_amt) > 0 else 0, tx_sender, 0)
+    amount_sent = functools.reduce(lambda tx_sum, tx_amt: tx_sum + sum(tx_amt) if len(tx_amt) > 0 else tx_sum + 0, tx_sender, 0)
     tx_recipient = [[tx['amount'] for tx in block['transactions'] if tx['recipient'] == participant] for block in blockchain]
 
     amount_received = functools.reduce(lambda tx_sum, tx_amt: tx_sum + tx_amt[0] if len(tx_amt) > 0 else 0, tx_recipient, 0)
@@ -79,6 +88,7 @@ def mine_block():
 
     # implementing list comprehension to get key in each dictionary in the block
     hashed_block = hash_block(last_block)
+    print(hashed_block)
 
     # determine reward for miners
     reward_transaction ={
