@@ -1,7 +1,7 @@
 import functools
 
 # hashing tool
-import hashlib
+# import hashlib
 
 # json(encodes data structures to strings)
 # for conversion of block to string
@@ -10,6 +10,9 @@ import json
 from collections import OrderedDict
 
 from hash_util import hash_block, hash_string
+
+# serializes and converts data to binary
+import pickle
 
 # declaring blockchain variable
 
@@ -27,6 +30,53 @@ owner = 'Nick'
 participants ={'Nick'}
 
 
+def load_data():
+    with open('blockchain.p', mode='rb') as f:
+        file_content = pickle.loads(f.read())
+        # print(file_content)
+        global blockchain
+        global open_transactions
+        blockchain = file_content['chain']
+        open_transactions = file_content['ot']
+        #
+        # # loads desirializes string giving back a python object
+        # blockchain = json.loads(file_content[0][:-1])
+        # updated_blockchain = []
+        # for block in blockchain:
+        #     updated_block = {
+        #         'previous_hash': block['previous_hash'],
+        #         'index': block['index'],
+        #         'proof': block['proof'],
+        #         'transactions': [OrderedDict(
+        #             [('sender', tx['sender']), ('recipient', tx['recipient']),
+        #             ('amount', tx['amount'])]) for tx in block['transactions']]
+        #     }
+        #     updated_blockchain.append(updated_block)
+        # blockchain = updated_blockchain
+        # open_transactions = json.loads(file_content[1])
+        # updated_transactions = []
+        # for tx in open_transactions:
+        #     updated_transaction = OrderedDict(
+        #         [('sender', tx['sender']), ('recipient', tx['recipient']), ('amount', tx['amount'])])
+        #     updated_transactions.append(updated_transaction)
+        # open_transactions = updated_transactions
+
+
+# load_data()
+
+
+def save_data():
+    with open('blockchain.p', mode='wb') as f:
+        # f.write(json.dumps(blockchain))
+        # f.write('\n')
+        # f.write(json.dumps(open_transactions))
+        save_data = {
+             'chain': blockchain,
+             'ot': open_transactions
+        }
+        f.write(pickle.dumps(save_data))
+
+
 def valid_proof(transactions, last_hash, proof):
     """ function for validating new hash"""
     guess = (str(transactions) + str(last_hash) + str(proof)).encode()
@@ -39,8 +89,10 @@ def proof_of_work():
     last_block = blockchain[-1]
     last_hash = hash_block(last_block)
     proof = 0
+
+    # trying different PoW number snad returning the first valid one
     while not valid_proof(open_transactions, last_hash, proof):
-        proof +=1
+        proof += 1
     return proof
 
 
@@ -78,10 +130,10 @@ def add_transaction(recipient, sender=owner,  amount=1.0):
     Appending new value of blockchain as well as last value of blockchain to blockchain
 
     """
-    transaction = {'sender': sender,
-                   'recipient': recipient,
-                   'amount': amount
-                   }
+    # transaction = {'sender': sender,
+    #                'recipient': recipient,
+    #                'amount': amount
+    #                }
     transaction = OrderedDict([('sender', sender), ('recipient', recipient), ('amount',amount)])
     if verify_transaction(transaction):
         open_transactions.append(transaction)
@@ -94,6 +146,7 @@ def add_transaction(recipient, sender=owner,  amount=1.0):
 
 
 def verify_transaction(transaction):
+    """ verifying transaction by checking whether sender has sufficient coins"""
     sender_balance = get_balance(transaction['sender'])
     return sender_balance >= transaction['amount']
 
@@ -104,20 +157,13 @@ def mine_block():
     # implementing list comprehension to get key in each dictionary in the block
     hashed_block = hash_block(last_block)
     proof = proof_of_work()
-
-    # determine reward for miners
-    # reward_transaction ={
-    #     'sender': 'MINING',
-    #     'recipient': owner,
-    #     'amount': MINING_REWARD,
-    # }
     reward_transaction = OrderedDict([('sender', 'MINING'), ('recipient', owner), ('amount', MINING_REWARD) ])
     # appending reward of mining transaction to transaction details
     copied_transactions = open_transactions[:]
     copied_transactions.append(reward_transaction)
     """
     joining hashed list of dictionaries
-    
+
     """
     # print(hashed_block)
     block = {'previous_hash': hashed_block,
@@ -208,7 +254,7 @@ while waiting_for_input:
 
         # adding transaction amount to the blockchain
         if add_transaction(recipient, amount=amount):
-            print('Add transaction')
+            print('Added transaction')
         else:
             print('Transaction Failed')
         print(open_transactions)
@@ -217,6 +263,7 @@ while waiting_for_input:
         # resetting transactions to an empty array when mining occurs
         if mine_block():
             open_transactions = []
+            save_data()
     elif user_choice == '3':
         print_blockchain_elements()
     elif user_choice == '4':
